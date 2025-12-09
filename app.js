@@ -100,6 +100,9 @@ class CollaborationApp {
     }
     
     initializeApp() {
+        // Initialize theme
+        this.initializeTheme();
+        
         // Show username modal
         this.showUsernameModal();
         
@@ -112,6 +115,11 @@ class CollaborationApp {
             if (e.key === 'Enter') {
                 this.joinDocument();
             }
+        });
+        
+        // Theme toggle button
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            this.toggleTheme();
         });
         
         // Mobile menu button
@@ -144,6 +152,39 @@ class CollaborationApp {
         
         // Handle window resize
         window.addEventListener('resize', this.handleResize.bind(this));
+    }
+    
+    initializeTheme() {
+        // Check localStorage first, then system preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        if (savedTheme) {
+            this.setTheme(savedTheme);
+        } else if (prefersDark) {
+            this.setTheme('dark');
+        } else {
+            this.setTheme('light');
+        }
+    }
+    
+    setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        const themeIcon = document.getElementById('theme-icon');
+        
+        if (theme === 'dark') {
+            themeIcon.textContent = '☀️';
+        } else {
+            themeIcon.textContent = '🌙';
+        }
+        
+        localStorage.setItem('theme', theme);
+    }
+    
+    toggleTheme() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        this.setTheme(newTheme);
     }
     
     showUsernameModal() {

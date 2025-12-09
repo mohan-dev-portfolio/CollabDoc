@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CollabDoc - Real-time Collaboration</title>
-    <icon rel="icon" href="image.png" type="image/x-icon">
+    <link rel="icon" href="image.png" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="header">
         <div class="logo">
-            <i>📝</i> CollabDoc
+            <img src="image.png" alt="CollabDoc Logo" class="logo-img">
+            <span>CollabDoc</span>
         </div>
         <div class="user-info">
+            <button class="theme-toggle" id="theme-toggle" title="Toggle Dark/Light Mode">
+                <span class="theme-icon" id="theme-icon">🌙</span>
+            </button>
             <div class="user-avatar" id="current-user-avatar">U</div>
             <span id="current-user-name">User</span>
             <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
